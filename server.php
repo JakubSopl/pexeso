@@ -30,7 +30,7 @@ if (isset($_POST['register'])) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password'])) {
             echo 'Přihlášení proběhlo úspěšně!';
-            $_SESSION['user_id'] = $row['full_name']; // ID uživatele
+            $_SESSION['user_id'] = $row['full_name']; 
 
             header('Location: index1.php');
         } else {
@@ -49,7 +49,6 @@ if (isset($_POST['register'])) {
         $user_id = $_SESSION['user_id'];
         $score = $_POST['score'];
         if ($user_id != 0) {
-            // SQL dotaz pro vložení dat do tabulky leaderboard
             $sql = "INSERT INTO scores (name, score) VALUES ('$user_id', '$score')";
             $result = mysqli_query($conn, $sql);
 
@@ -61,8 +60,4 @@ if (isset($_POST['register'])) {
         }
     }
 }
-
-
-//require 'index1.php';
-
 ?>

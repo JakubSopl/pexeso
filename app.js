@@ -147,14 +147,14 @@ const cardArray = [
 ]
 console.log(cardArray)
 
-cardArray.sort(() => 0.5 - Math.random())       //Zamichani
+cardArray.sort(() => 0.5 - Math.random())       
 
-const gridDisplay = document.querySelector('#grid')                //'grid' - ID divu
-const resultDisplay = document.querySelector('#result')            //H3 id
+const gridDisplay = document.querySelector('#grid')               
+const resultDisplay = document.querySelector('#result')            
 
 
 
-let cardsChosen = []            //pole s otocenyma kartama
+let cardsChosen = []           
 let cardsChosenIds = []
 
 const cardsWon = []
@@ -208,11 +208,9 @@ function chechkMatch() {
             score: cardsWon.length
         },
         success: function (response) {
-          // V případě úspěšného uložení dat
           console.log("Data byla úspěšně uložena");
         },
-        error: function () {
-          // V případě chyby při ukládání dat
+        error: function () {        
           console.log("Došlo k chybě při ukládání dat");
         },
       });
@@ -231,8 +229,6 @@ function flipCard() {
     const cardId = this.getAttribute('data-id')
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenIds.push(cardId)
-    //console.log('clicked', cardId)
-    //console.log(cardsChosen)
     this.setAttribute('src', cardArray[cardId].img)
     if (cardsChosen.length === 2) {
         setTimeout(chechkMatch, 500)

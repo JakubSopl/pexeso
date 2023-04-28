@@ -18,7 +18,7 @@ session_start();
             }
 
             body {
-            background-image: url('images/background3.jpg');
+            background-image: url('images/background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             }
@@ -127,10 +127,11 @@ session_start();
 
             </style>
 
-<script
-  src="https://code.jquery.com/jquery-3.6.3.min.js"
-  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-  crossorigin="anonymous"></script>
+            <script
+                src="https://code.jquery.com/jquery-3.6.3.min.js"
+                integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+                crossorigin="anonymous">
+            </script>
         </head>
         <body>
 
