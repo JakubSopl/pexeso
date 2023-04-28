@@ -198,13 +198,34 @@ function chechkMatch() {
     }
     resultDisplay.textContent = cardsWon.length
 
+    
+    $.ajax({
+        url: "./server.php", 
+        type: "POST",
+        name: "savedata",
+        data: {
+          //user_id: 1,
+            score: cardsWon.length
+        },
+        success: function (response) {
+          // V případě úspěšného uložení dat
+          console.log("Data byla úspěšně uložena");
+        },
+        error: function () {
+          // V případě chyby při ukládání dat
+          console.log("Došlo k chybě při ukládání dat");
+        },
+      });
+
     cardsChosen = []
     cardsChosenIds = []
 
     if (cardsWon.length == (cardArray.length/2)) {
         resultDisplay.textContent = 'našel jsi vše!'
+
+        }
     }
-}
+
 
 function flipCard() {
     const cardId = this.getAttribute('data-id')

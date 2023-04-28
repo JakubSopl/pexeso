@@ -52,6 +52,11 @@ session_start();
             
 
             </style>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
         </head>
         <body>
 
@@ -63,6 +68,15 @@ session_start();
 
                 <button type="button"><a href="leaderboard.php">leaderboard</a></button>
 
+                <br><br>
+
+                <form method="post">
+                <label for="size">Enter the grid size:</label>
+                <input type="number" name="size" id="size" required>
+                <input type="submit" name="submit" value="Create Grid">
+                </form>
+
+
                 <div id="grid">
             
                 </div>
@@ -72,5 +86,20 @@ session_start();
             
 
             <script src="app.js"></script>
+
+            <?php
+
+            if(isset($_POST['submit'])){
+            $size = $_POST['size'];
+            for($i=0; $i<$size; $i++){
+                echo '<div id="grid">';
+                for($j=0; $j<$size; $j++){
+                echo '<div id="grid"></div>';
+                }
+                echo '</div>';
+            }
+            }
+            ?>
+
         </body>
     </html>
