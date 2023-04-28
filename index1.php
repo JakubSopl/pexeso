@@ -52,8 +52,8 @@ session_start();
             }
 
             * {
-                margin=0;
-                padding=0;              
+                margin: 0;
+                padding: 0;              
             }
 
             h3{
