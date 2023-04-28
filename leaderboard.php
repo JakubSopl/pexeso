@@ -23,6 +23,12 @@
 		tr:hover {
 			background-color: #f5f5f5;
 		}
+
+        h1{
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 45px;
+        }
 	</style>
 </head>
 <body>
@@ -32,21 +38,21 @@
         @include 'database.php';
 
 
-        // Check connection
+        //connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        // Step 2: Retrieve data
-        $sql = "SELECT name, score FROM scores ORDER BY score DESC LIMIT 10";
+        // data
+        $sql = "SELECT name, MAX(score) as score FROM scores GROUP BY name ORDER BY score DESC LIMIT 10";
         $result = mysqli_query($conn, $sql);
 
-        // Step 3: Display data
+        
         echo "<table>";
         echo "<tr><th>Name</th><th>Score</th></tr>";
 
         if (mysqli_num_rows($result) > 0) {
-            // output data of each row
+            // vypis
             while($row = mysqli_fetch_assoc($result)) {
                 echo "<tr><td>" . $row["name"]. "</td><td>" . $row["score"]. "</td></tr>";
             }
@@ -56,7 +62,7 @@
 
         echo "</table>";
 
-        // Close connection
+        
         mysqli_close($conn);
 
         ?>

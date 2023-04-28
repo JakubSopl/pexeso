@@ -13,42 +13,78 @@ if (isset($_SESSION["user"])) {
     <title>Login Form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <style>
+    body {
+        background-color: #f7f7f7;
+        font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    .form label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .form input[type="email"],
+    .form input[type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    p {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    a {
+        color: #4CAF50;
+        font-weight: 600;
+        text-decoration: none;
+        }
+
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>
 </head>
 <body>
     <div class="container">
-        <?php
-        if (isset($_POST["login"])) {
-           $email = $_POST["email"];
-           $password = $_POST["password"];
-            require_once "database.php";
-            $sql = "SELECT * FROM users WHERE email = '$email'";
-            $result = mysqli_query($conn, $sql);
-            $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            if ($user) {
-                if (password_verify($password, $user["password"])) {
-                    session_start();
-                    $_SESSION["user"] = "yes";
-                    header("Location: index1.php");
-                    die();
-                }else{
-                    echo "<div class='alert alert-danger'>Password does not match</div>";
-                }
-            }else{
-                echo "<div class='alert alert-danger'>Email does not match</div>";
-            }
-        }
-        ?>
-      <form action="login.php" method="post">
-        <div class="form-group">
-            <input type="email" placeholder="Enter Email:" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" placeholder="Enter Password:" name="password" class="form-control">
-        </div>
-        <div class="form-btn">
-            <input type="submit" value="Login" name="login" class="btn btn-primary">
-        </div>
-      </form>
+       
+    <form action="server.php" method="POST" class="form">
+        <label>Email:</label>
+        <input type="email" name="email"><br>
+        <label>Heslo:</label>
+        <input type="password" name="password"><br>
+        <input type="submit" name="login" value="Přihlásit se">
+    </form>
      <div><p>Not registered yet <a href="registration.php">Register Here</a></p></div>
      <div><p>Play unregistered <a href="index1.php">Play here</a></p></div>
     </div>
