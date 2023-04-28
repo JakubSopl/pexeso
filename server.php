@@ -35,11 +35,11 @@ if (isset($_POST['register'])) {
             header('Location: index1.php');
         } else {
             require 'login.php';
-            echo 'Špatné heslo!';
+            echo '<p class="error" style="color:red">špatné heslo </p>';
         }
     } else {
         require 'login.php';
-        echo 'Špatný email!';
+        echo '<p class="error" style="color:red">špatný email </p>';
     }
 } else if(isset($_POST['NoLogin'])){
     require 'index1.php';

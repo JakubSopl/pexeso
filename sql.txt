@@ -1,0 +1,14 @@
+CREATE DATABASE login_register;
+--------------------
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  full_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+------------------------
+CREATE TABLE scores (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  score INT NOT NULL
+);

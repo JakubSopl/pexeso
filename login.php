@@ -74,19 +74,73 @@ if (isset($_SESSION["user"])) {
         text-decoration: underline;
     }
     </style>
+
+    
 </head>
 <body>
+       
     <div class="container">
        
-    <form action="server.php" method="POST" class="form">
-        <label>Email:</label>
-        <input type="email" name="email"><br>
-        <label>Heslo:</label>
-        <input type="password" name="password"><br>
-        <input type="submit" name="login" value="Přihlásit se">
+    <form action="server.php" method="POST" class="form" onsubmit="return validateForm()">
+    <label>Email:</label>
+    <input type="email" name="email" id="email"><br>
+    <span id="email-error"></span>
+    <label>Heslo:</label>
+    <input type="password" name="password" id="password"><br>
+    <span id="password-error"></span>
+    <input type="submit" name="login" value="Přihlásit se">  
     </form>
+
+    <div>
      <div><p>Not registered yet <a href="registration.php">Register Here</a></p></div>
      <div><p>Play unregistered <a href="index1.php">Play here</a></p></div>
     </div>
+
+    </div>
+
+    <script>
+        function validateForm() {
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var valid = true;
+
+        if (email.value == "") {
+            email.style.borderColor = "red";
+            document.getElementById("email-error").innerHTML = "Prosím vyplňte e-mailovou adresu.";
+            valid = false;
+        }
+        else if (!isValidEmail(email.value)) {
+            email.style.borderColor = "red";
+            document.getElementById("email-error").innerHTML = "Zadejte prosím platnou e-mailovou adresu.";
+            valid = false;
+        }
+        else {
+            email.style.borderColor = "";
+            document.getElementById("email-error").innerHTML = "";
+        }
+
+        if (password.value == "") {
+            password.style.borderColor = "red";
+            document.getElementById("password-error").innerHTML = "Prosím vyplňte heslo.";
+            valid = false;
+        }
+        else if (password.value.length < 6) {
+            password.style.borderColor = "red";
+            document.getElementById("password-error").innerHTML = "Vaše heslo je příliš krátké. Musí mít alespoň 6 znaků.";
+            valid = false;
+        }
+        else {
+            password.style.borderColor = "";
+            document.getElementById("password-error").innerHTML = "";
+        }
+
+        return valid;
+        }
+
+        function isValidEmail(email) {
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    </script>
 </body>
 </html>

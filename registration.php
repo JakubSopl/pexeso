@@ -72,20 +72,24 @@ if (isset($_SESSION["user"])) {
     </style>
 </head>
 <body>
-    <div class="container">
-    <form action="server.php" method="post" class="form">
+<div class="container">
+    <form action="server.php" method="post" class="form" onsubmit="return validateForm()">
 
-        <label for="text">napiš jmeno kurva</label>
-        <input type="text" name="text"><br>
+        <label for="text">Name:</label>
+        <input type="text" name="text" id="name">
+        <span id="nameError" class="error"></span><br>
 
         <label>Email:</label>
-        <input type="email" name="email"><br>
+        <input type="email" name="email" id="email">
+        <span id="emailError" class="error"></span><br>
 
         <label>Password:</label>
-        <input type="password" name="password"><br>
+        <input type="password" name="password" id="password">
+        <span id="passwordError" class="error"></span><br>
         
         <label>Confirm Password:</label>
-        <input type="password" name="check_password"><br>
+        <input type="password" name="check_password" id="confirm_password">
+        <span id="confirmPasswordError" class="error"></span><br>
 
         <input type="submit" name="register" value="Register">
 
@@ -93,6 +97,70 @@ if (isset($_SESSION["user"])) {
 
     </form>
         
-    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var confirm_password = document.getElementById("confirm_password").value;
+
+        var nameError = document.getElementById("nameError");
+        var emailError = document.getElementById("emailError");
+        var passwordError = document.getElementById("passwordError");
+        var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+        nameError.innerHTML = "";
+        emailError.innerHTML = "";
+        passwordError.innerHTML = "";
+        confirmPasswordError.innerHTML = "";
+
+        var isValid = true;
+
+        if (name.trim() == "") {
+            nameError.innerHTML = "Please enter your name.";
+            document.getElementById("name").style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (email.trim() == "") {
+            emailError.innerHTML = "Please enter your email address.";
+            document.getElementById("email").style.borderColor = "red";
+            isValid = false;
+        } else {
+            var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!pattern.test(email)) {
+                emailError.innerHTML = "Please enter a valid email address.";
+                document.getElementById("email").style.borderColor = "red";
+                isValid = false;
+            }
+        }
+
+        if (password.trim() == "") {
+            passwordError.innerHTML = "Please enter your password.";
+            document.getElementById("password").style.borderColor = "red";
+            isValid = false;
+        } else if (password.length < 6) {
+            passwordError.innerHTML = "Password should be at least 6 characters long.";
+            document.getElementById("password").style.borderColor = "red";
+            isValid = false;
+        }
+
+        if (confirm_password.trim() == "") {
+            confirmPasswordError.innerHTML = "Please confirm your password.";
+            document.getElementById("confirm_password").style.borderColor = "red";
+            isValid = false;
+        } else if (password != confirm_password) {
+            confirmPasswordError.innerHTML = "Passwords do not match.";
+            document.getElementById("confirm_password").style.borderColor = "red";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+
+    
 </body>
 </html>
