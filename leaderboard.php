@@ -23,6 +23,12 @@
 		tr:hover {
 			background-color: #f5f5f5;
 		}
+
+        h1{
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 45px;
+        }
 	</style>
 </head>
 <body>
@@ -38,7 +44,7 @@
         }
 
         // data
-        $sql = "SELECT name, score FROM scores ORDER BY score DESC LIMIT 10";
+        $sql = "SELECT name, MAX(score) as score FROM scores GROUP BY name ORDER BY score DESC LIMIT 10";
         $result = mysqli_query($conn, $sql);
 
         
